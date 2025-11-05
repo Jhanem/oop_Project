@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run JavaFX App",
+            "request": "launch",
+            "mainClass": "App",
+            "vmArgs": "--module-path \"C:\\Users\\You\\Desktop\\javafx\\lib\" --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.base",
+            "console": "integratedTerminal" 
+        }
+    ]
+}
