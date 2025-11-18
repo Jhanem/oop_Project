@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="mainStack" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App">
+   
+   <!-- ==================== 1. INPUT SCREEN (View 1) ==================== -->
+   <VBox fx:id="inputPane" alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0">
+      <children>
+         <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="App Reviewer Tool">
+            <font>
+               <Font name="Arial" size="36.0" />
+            </font>
+         </Label>
+         
+         <!-- Input Field -->
+         <TextField fx:id="input" 
+                    onKeyPressed="#handleEnterKey" 
+                    prefHeight="40.0" 
+                    prefWidth="400.0" 
+                    promptText="Enter app name (e.g., WhatsApp, Spotify)" 
+                    style="-fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-color: white; -fx-padding: 0 10 0 10;">
+            <VBox.margin>
+               <Insets left="200.0" right="200.0" />
+            </VBox.margin></TextField>
+         
+         <!-- Submit Button -->
+         <Button onAction="#handleSubmitAction" 
+                 text="Search Reviews" 
+                 style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-padding: 10 20; -fx-background-radius: 5;" />
+      </children>
+      <padding>
+         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+      </padding>
+   </VBox>
+   
+   <!-- ==================== 2. OUTPUT SCREEN (View 2) ==================== -->
+   <VBox fx:id="outputPane" prefHeight="600.0" prefWidth="800.0" visible="false" spacing="15.0" style="-fx-background-color: #f0f4f8;">
+      <children>
+         <!-- Header: Back Button and App Name -->
+         <HBox alignment="CENTER_LEFT" spacing="20.0">
+             <Button onAction="#handleBackAction" 
+                     text="← Back" 
+                     style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 5 15; -fx-background-radius: 5;" />
+             <Label fx:id="appNameLabel" text="App: (Loading...)">
+                 <font>
+                     <Font name="Arial Bold" size="24.0" />
+                 </font>
+             </Label>
+         </HBox>
+         
+         <!-- BASIC DETAILS: Grid for Rating and Link -->
+         <GridPane hgap="10.0" vgap="10.0" prefWidth="760.0" style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #ecf0f1; -fx-border-radius: 5;">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="620.0" />
+            </columnConstraints>
+            
+            <!-- Rating Row -->
+            <Label text="Rating:" style="-fx-font-weight: bold;" />
+            <Label fx:id="ratingLabel" text="(Loading...)" wrapText="true" GridPane.columnIndex="1" style="-fx-text-fill: #27ae60;" />
+            
+            <!-- Link Row -->
+            <Label text="Details Link:" style="-fx-font-weight: bold;" GridPane.rowIndex="1" />
+            <Hyperlink onAction="#handleReviewLinkAction" text="See Full Details (Mock Link)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </GridPane>
+         
+         
+         <!-- 1. USER REVIEW SECTION (Large, Scrollable Box) -->
+         <Label text="User Reviews:" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;">
+             <font>
+                 <Font name="System Bold" size="16.0" />
+             </font>
+         </Label>
+         
+         <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" prefHeight="250.0" prefWidth="760.0" style="-fx-border-color: #ecf0f1; -fx-border-radius: 5;">
+            <content>
+               <!-- fx:id is now userReviewLabel for the long text content -->
+               <Label fx:id="userReviewLabel" 
+                      text="(Please wait while fetching data...)" 
+                      wrapText="true" 
+                      style="-fx-background-color: white; -fx-padding: 15;" />
+            </content>
+         </ScrollPane>
+
+         <!-- 2. SUMMARY SECTION (Small, Fixed Box) -->
+         <Label text="App Summary:" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;">
+             <font>
+                 <Font name="System Bold" size="16.0" />
+             </font>
+         </Label>
+         
+         <!-- fx:id is now summaryLabel for the short text content -->
+         <Label fx:id="summaryLabel" 
+                text="(Loading...)" 
+                wrapText="true" 
+                style="-fx-background-color: white; -fx-padding: 15; -fx-border-color: #ecf0f1; -fx-border-radius: 5;" />
+
+      </children>
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
+   </VBox>
+   
+   <Label fx:id="output" visible="false" /> 
+</StackPane>
